@@ -18,9 +18,9 @@ function send_to_imgur {
 }
 
 function check_dependencies {
-	for ARG in "$@" ; do
-		if ! which "$ARG" &>/dev/null ; then
-			echo "Missing $ARG"
+	for dep in "$@" ; do
+		if ! which "$dep" &>/dev/null ; then
+			echo "Missing $dep"
 			exit 1
 		fi
 	done
