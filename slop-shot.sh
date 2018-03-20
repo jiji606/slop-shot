@@ -39,7 +39,7 @@ Save screenshots and send them to imgur easily.
 	exit 0
 }
 
-while getopts ":hin:s:vxq" opt; do
+while getopts ":hs:ix" opt; do
 	case $opt in
 		h)
 			usage
