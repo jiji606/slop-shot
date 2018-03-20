@@ -31,11 +31,13 @@ function save_to_path {
 }
 
 function usage {
-	echo "Usage:
+cat << EOF
+Usage:
 Save screenshots and send them to imgur easily.
 -s FILE -- save to disk
 -i      -- send to imgur
 -x      -- don't copy"
+EOF
 	exit 0
 }
 
