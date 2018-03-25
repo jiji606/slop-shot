@@ -13,14 +13,14 @@ function send_to_imgur {
 	link=$(echo "$response" | grep -oP 'http.*(?=</link>)')
 	echo "$link"
 	if [[ -z $p_copy ]] ; then
-		echo $link | xclip -i
+		echo "$link" | xclip -i
 	fi
 }
 
 function check_dependencies {
-	for ARG in $@ ; do
-		if ! which $ARG &>/dev/null ; then
-			echo "Missing $ARG"
+	for dep in "$@" ; do
+		if ! which "$dep" &>/dev/null ; then
+			echo "Missing $dep"
 			exit 1
 		fi
 	done
@@ -31,15 +31,17 @@ function save_to_path {
 }
 
 function usage {
-	echo "Usage:
+cat << EOF
+Usage:
 Save screenshots and send them to imgur easily.
 -s FILE -- save to disk
 -i      -- send to imgur
 -x      -- don't copy"
+EOF
 	exit 0
 }
 
-while getopts ":hin:s:vxq" opt; do
+while getopts ":hs:ix" opt; do
 	case $opt in
 		h)
 			usage
@@ -79,7 +81,7 @@ if [[ -n $p_save ]] ; then
 	if [[ -d "$file_path" ]] ; then
 		echo "Saving in dir $file_path"
 		file_path="$file_path/$SCREENSHOT_SAVE"
-		save_to_path $file_path
+		save_to_path "$file_path"
 	elif [[ -f "$file_path" ]] ; then
 		echo "File exists, overwrite? (y/n)"
 		while read -r line ; do
