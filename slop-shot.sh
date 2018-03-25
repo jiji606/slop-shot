@@ -87,7 +87,8 @@ if [[ -n $p_save ]] ; then
 				save_to_path "$file_path"
 				exit 0
 			elif [[ $line == n ]] ; then
-				exit 0
+				echo "Won't overwrite $file_path"
+				exit 1
 			fi
 		done
 	else
